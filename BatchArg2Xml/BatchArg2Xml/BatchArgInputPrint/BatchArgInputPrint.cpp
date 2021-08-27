@@ -5,6 +5,7 @@
 #include <chrono>
 #include <string>
 #include <vector>
+#include <Windows.h>
 
 using namespace std;
 int main(int argc, char *argv[])
@@ -20,7 +21,11 @@ int main(int argc, char *argv[])
 		}
 		else { /* do nothing */ }
 	}
-	catch (const std::exception& e) { cout << e.what() << endl; }
+	catch (const std::exception& e) {
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 2); // set console text color
+		cout << e.what() << endl;
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7); // recover console text color
+	}
 
 	for (int i = 0; i < argc; ++i)
 	{
